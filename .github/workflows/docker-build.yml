@@ -1,0 +1,21 @@
+name: Build Docker Image
+
+# This workflow runs when you push code to the main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Step 1: Get the code from your repository
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      # Step 2: Build the Docker image
+      - name: Build Docker image
+        run: docker build -f Dockerfile.multistage -t echo-server:latest .
+
