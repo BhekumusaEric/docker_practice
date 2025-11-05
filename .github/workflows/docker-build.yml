@@ -9,13 +9,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
       # Step 1: Get the code from your repository
       - name: Checkout code
         uses: actions/checkout@v4
-      
-      # Step 2: Build the Docker image
+
+      # Step 2: Build the Docker image using Makefile
+      # This ensures we use the same command locally and in CI/CD
       - name: Build Docker image
-        run: docker build -f Dockerfile.multistage -t echo-server:latest .
+        run: make build
 
