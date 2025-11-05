@@ -1,0 +1,17 @@
+# Ignore git files
+.git
+.gitignore
+
+# Ignore IDE files
+.idea
+*.iml
+.vscode
+
+# Ignore Docker files
+Dockerfile*
+.dockerignore
+
+# Ignore documentation
+*.md
+README*
+

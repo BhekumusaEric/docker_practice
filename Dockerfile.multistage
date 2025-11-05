@@ -1,0 +1,28 @@
+# Stage 1: Build the application
+FROM maven:3.9-eclipse-temurin-11 AS builder
+
+# Set working directory
+WORKDIR /build
+
+# Copy pom.xml and source code
+COPY pom.xml .
+COPY src ./src
+
+# Build the application
+RUN mvn clean package -DskipTests
+
+# Stage 2: Create the runtime image
+FROM eclipse-temurin:11-jre
+
+# Set working directory
+WORKDIR /app
+
+# Copy the JAR from the builder stage
+COPY --from=builder /build/target/echo-server-0.0.0-SNAPSHOT-jar-with-dependencies.jar /app/echo-server.jar
+
+# Expose port 9000
+EXPOSE 9000
+
+# Run the application
+CMD ["java", "-jar", "echo-server.jar"]
+
